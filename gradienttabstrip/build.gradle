@@ -1,0 +1,16 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 25
+        versionCode 31
+        versionName "25.3.0"
+    }
+}
+
+dependencies {
+    compile 'am.widget:basetabstrip:25.3.0'
+}

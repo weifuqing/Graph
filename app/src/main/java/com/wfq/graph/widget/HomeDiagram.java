@@ -25,9 +25,9 @@ import com.wfq.graph.R;
 
 /**
  * 线框图
- * 
+ *
  * @author Administrator
- * 
+ *
  */
 public class HomeDiagram extends View {
 
@@ -35,13 +35,18 @@ public class HomeDiagram extends View {
 	private float tb;
 	private float interval_left_right;
 	private float interval_left;
-	private Paint paint_date, paint_brokenLine, paint_dottedline,
+	private Paint paint_date, paint_brokenLine,
+			paint_dottedline,
 			paint_brokenline_big, framPanint;
 
 	private int time_index;
 	private Bitmap bitmap_point;
 	private Path path;
 	private float dotted_text;
+
+	private List<String> horizontal_list;
+	private List<String> vertical_list;
+	private String vertical_unit;
 
 	public float getDotted_text() {
 		return dotted_text;
@@ -52,13 +57,15 @@ public class HomeDiagram extends View {
 	}
 
 	private int fineLineColor = 0x5faaaaaa; // 灰色
-	private int blueLineColor = 0xff00ffff; // 蓝色
+	private int greenLineColor = 0xff20C420; // 绿色
 	private int orangeLineColor = 0xffd56f2b; // 橙色
 
 	public HomeDiagram(Context context, List<Integer> milliliter) {
 		super(context);
 		init(milliliter);
 	}
+
+
 
 	public void init(List<Integer> milliliter) {
 		if (null == milliliter || milliliter.size() == 0)
@@ -76,7 +83,7 @@ public class HomeDiagram extends View {
 
 		paint_brokenLine = new Paint();
 		paint_brokenLine.setStrokeWidth(tb * 0.1f);
-		paint_brokenLine.setColor(blueLineColor);
+		paint_brokenLine.setColor(greenLineColor);
 		paint_brokenLine.setAntiAlias(true);
 
 		paint_dottedline = new Paint();
@@ -102,7 +109,7 @@ public class HomeDiagram extends View {
 
 	/**
 	 * 移除左右为零的数据
-	 * 
+	 *
 	 * @return
 	 */
 	public List<Integer> delZero(List<Integer> milliliter) {
@@ -142,7 +149,7 @@ public class HomeDiagram extends View {
 
 	/**
 	 * 绘制竖线
-	 * 
+	 *
 	 * @param c
 	 */
 	public void drawStraightLine(Canvas c) {
@@ -177,7 +184,7 @@ public class HomeDiagram extends View {
 
 	/**
 	 * 绘制折线
-	 * 
+	 *
 	 * @param c
 	 */
 	public void drawBrokenLine(Canvas c) {
@@ -240,7 +247,7 @@ public class HomeDiagram extends View {
 
 	/**
 	 * 绘制时间
-	 * 
+	 *
 	 * @param c
 	 */
 	public void drawDate(Canvas c) {

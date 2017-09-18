@@ -1,89 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#262b31"
-    android:orientation="vertical" >
-
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:background="#373e49"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <RelativeLayout
+        <include layout="@layout/head_toolbar"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_main"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="vertical" >
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="demo"
-                android:textColor="#ffffff"
-                android:textSize="@dimen/text_size_18"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
-        <LinearLayout
+        <am.widget.gradienttabstrip.GradientTabStrip
+            android:id="@+id/tab_bottom"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/bg_gradienttabstrip_tab"
+            android:textColor="@drawable/color_gradienttabstrip_tab"
+            android:textSize="12sp"
+            app:gtsBackground="@color/white"
+            app:gtsDrawablePadding="4dp"
+            app:gtsTagPaddingLeft="2dp"
+            app:gtsTagPaddingRight="2dp" />
 
-            <LinearLayout
-                android:id="@+id/arc"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="42"
-                android:gravity="center_horizontal"
-                android:orientation="vertical" >
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="58"
-                android:orientation="vertical" >
-
-                <HorizontalScrollView
-                    android:layout_margin="20dp"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:scrollbars="none" >
-
-                    <RelativeLayout
-                        android:id="@+id/pillars"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent" >
-                    </RelativeLayout>
-                </HorizontalScrollView>
-            </LinearLayout>
-        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:background="#f4f4f7"
-        android:orientation="vertical" >
-
-        <HorizontalScrollView
-            android:layout_margin="20dp"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:scrollbars="none" >
-
-            <RelativeLayout
-                android:id="@+id/linear"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
-            </RelativeLayout>
-        </HorizontalScrollView>
-    </LinearLayout>
-
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

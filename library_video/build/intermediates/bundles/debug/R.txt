@@ -1,0 +1,3 @@
+int id progressBar 0x7f030001
+int id videoView 0x7f030000
+int layout view_video 0x7f020000

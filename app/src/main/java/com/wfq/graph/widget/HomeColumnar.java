@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
 import com.wfq.graph.R;
-import com.wfq.graph.bean.Score;
+import com.wfq.graph.data.bean.Score;
 
 /**
  * 柱状图

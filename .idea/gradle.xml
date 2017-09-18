@@ -3,16 +3,21 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="LOCAL" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="D:\Android\Android Studio\gradle\gradle-2.4" />
-        <option name="gradleJvm" value="1.8" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/gradienttabstrip" />
+            <option value="$PROJECT_DIR$/library_qiniu" />
+            <option value="$PROJECT_DIR$/library_video" />
+            <option value="$PROJECT_DIR$/pullRefreshlibrary" />
+            <option value="$PROJECT_DIR$/statistics" />
+            <option value="$PROJECT_DIR$/verifycode" />
           </set>
         </option>
+        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
