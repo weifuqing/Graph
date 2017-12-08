@@ -11,10 +11,6 @@ public class AppManager {
     private static Stack<Activity> activityStack;
     private static AppManager instance;
 
-
-    private static Stack<Activity> stack_register;
-    private static AppManager instance_register;
-
     private AppManager() {
 
     }
@@ -29,17 +25,6 @@ public class AppManager {
         }
         return instance;
     }
-
-    /*
-    * 添加注册流程或者实名流程的实例
-     */
-   public static AppManager getRegisterManager(){
-       if (instance_register == null) {
-           instance_register = new AppManager();
-           instance_register.stack_register = new Stack();
-       }
-       return instance_register;
-   }
 
     /**
      * 添加Activity到堆栈

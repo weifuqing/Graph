@@ -5,11 +5,10 @@
       <module fileurl="file://$PROJECT_DIR$/Graph.iml" filepath="$PROJECT_DIR$/Graph.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/gradienttabstrip/gradienttabstrip.iml" filepath="$PROJECT_DIR$/gradienttabstrip/gradienttabstrip.iml" />
-      <module fileurl="file://$PROJECT_DIR$/library_qiniu/library_qiniu.iml" filepath="$PROJECT_DIR$/library_qiniu/library_qiniu.iml" />
-      <module fileurl="file://$PROJECT_DIR$/library_video/library_video.iml" filepath="$PROJECT_DIR$/library_video/library_video.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library_zxing/library_zxing.iml" filepath="$PROJECT_DIR$/library_zxing/library_zxing.iml" />
       <module fileurl="file://$PROJECT_DIR$/pullRefreshlibrary/pullRefreshlibrary.iml" filepath="$PROJECT_DIR$/pullRefreshlibrary/pullRefreshlibrary.iml" />
-      <module fileurl="file://$PROJECT_DIR$/statistics/statistics.iml" filepath="$PROJECT_DIR$/statistics/statistics.iml" />
       <module fileurl="file://$PROJECT_DIR$/verifycode/verifycode.iml" filepath="$PROJECT_DIR$/verifycode/verifycode.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vitamio/vitamio.iml" filepath="$PROJECT_DIR$/vitamio/vitamio.iml" />
     </modules>
   </component>
 </project>

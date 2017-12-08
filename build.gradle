@@ -14,7 +14,9 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()//如果 jcenter 很慢，尝试添加 mavenCentral 并调整到首行
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 

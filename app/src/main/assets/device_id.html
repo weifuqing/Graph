@@ -2,6 +2,15 @@
 <html>
 <head>
     <title>Device Example</title>
+
+
+    <script type="text/javascript">
+    function show(info){
+        alert("哈哈");
+        window.android.js();
+    }
+    </script>
+
 </head>
 <body>
 <a href="financial://app">打开理财安全助手1</a>
@@ -9,5 +18,9 @@
 ——————————分隔线————————————
 
 <a href="financialApp25xc://app">打开理财安全助手2</a>
+
+
+<input type="button" value="调用Android方法" onclick="window.android.hellojs()"/>
+
 </body>
 </html>

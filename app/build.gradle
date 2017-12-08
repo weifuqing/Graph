@@ -48,7 +48,6 @@ dependencies {
     // 此处以JPush 3.0.3 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.1.1'
     // 此处以JCore 1.1.1 版本为例。
-    compile project(':library_qiniu')
     compile project(':pullRefreshlibrary')
     //leakcanary
 
@@ -75,10 +74,12 @@ dependencies {
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.jude:easyrecyclerview:4.0.2'
     compile files('libs/wechat-sdk-android-with-mta-1.1.6.jar')
-    compile project(path: ':statistics')
-    compile project(':library_video')
     compile 'com.alibaba:fastjson:1.2.37'
-//    环信
+    //    环信
     compile 'com.google.android.gms:play-services-gcm:9.4.0'
     compile 'com.hyphenate:hyphenate-sdk:3.3.0'
+    compile 'com.google.code.gson:gson:2.8.1'
+    //recyclerAdapter
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    compile project(':vitamio')
 }

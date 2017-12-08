@@ -33,10 +33,12 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.internal.FlipLoadingLayout;
 import com.handmark.pulltorefresh.library.internal.LoadingLayout;
 import com.handmark.pulltorefresh.library.internal.RotateLoadingLayout;
+import com.handmark.pulltorefresh.library.internal.SelfLoadingLayout;
 import com.handmark.pulltorefresh.library.internal.Utils;
 import com.handmark.pulltorefresh.library.internal.ViewCompat;
 
@@ -1288,6 +1290,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	}
 
 	public static enum AnimationStyle {
+
+		SELF_DEFINE,
 		/**
 		 * This is the default for Android-PullToRefresh. Allows you to use any
 		 * drawable, which is automatically rotated and used as a Progress Bar.
@@ -1301,7 +1305,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		FLIP;
 
 		static AnimationStyle getDefault() {
-			return ROTATE;
+			return SELF_DEFINE;
 		}
 
 		/**
@@ -1324,8 +1328,10 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 		LoadingLayout createLoadingLayout(Context context, Mode mode, Orientation scrollDirection, TypedArray attrs) {
 			switch (this) {
-				case ROTATE:
+				case SELF_DEFINE:
 				default:
+//					return new SelfLoadingLayout(context, mode, scrollDirection, attrs);
+				case ROTATE:
 					return new RotateLoadingLayout(context, mode, scrollDirection, attrs);
 				case FLIP:
 					return new FlipLoadingLayout(context, mode, scrollDirection, attrs);

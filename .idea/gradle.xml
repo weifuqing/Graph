@@ -10,11 +10,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/gradienttabstrip" />
-            <option value="$PROJECT_DIR$/library_qiniu" />
-            <option value="$PROJECT_DIR$/library_video" />
+            <option value="$PROJECT_DIR$/library_zxing" />
             <option value="$PROJECT_DIR$/pullRefreshlibrary" />
-            <option value="$PROJECT_DIR$/statistics" />
             <option value="$PROJECT_DIR$/verifycode" />
+            <option value="$PROJECT_DIR$/vitamio" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

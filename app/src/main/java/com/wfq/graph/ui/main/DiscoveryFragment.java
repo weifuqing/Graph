@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.example.statistics.StatService;
 import com.wfq.graph.R;
 import com.wfq.graph.base.BaseFragment;
 import com.wfq.graph.data.bean.Score;
@@ -73,12 +72,10 @@ public class DiscoveryFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        StatService.startPage("发现");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        StatService.endPage("发现");
     }
 }

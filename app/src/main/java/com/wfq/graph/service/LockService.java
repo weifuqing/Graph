@@ -9,7 +9,6 @@ import android.content.IntentFilter;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import com.danikula.videocache.service.MusicPlayer;
 import com.wfq.graph.ui.lock.LockActivity;
 
 /**
@@ -53,7 +52,7 @@ public class LockService extends Service {
             public void onReceive(final Context context, final Intent intent) {
                 String action = intent.getAction();
                 //屏幕亮
-                if (Intent.ACTION_SCREEN_ON.equals(action)&& MusicPlayer.isPlaying()) {
+                if (Intent.ACTION_SCREEN_ON.equals(action)&& false) {
                     Intent i = new Intent(context,LockActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -64,7 +63,7 @@ public class LockService extends Service {
                     context.startActivity(i);
                 }
                 //屏幕灭
-                if (Intent.ACTION_SCREEN_OFF.equals(action)&& MusicPlayer.isPlaying()) {
+                if (Intent.ACTION_SCREEN_OFF.equals(action)&& false) {
                     Intent i = new Intent(context,LockActivity.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

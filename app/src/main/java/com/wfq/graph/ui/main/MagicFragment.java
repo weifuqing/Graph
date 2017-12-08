@@ -7,16 +7,13 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.statistics.StatConfig;
-import com.example.statistics.bean.Event;
-import com.example.statistics.bean.StatReportStrategy;
-import com.example.statistics.utils.LogUtil;
 import com.wfq.graph.R;
 import com.wfq.graph.base.BaseLazyFragment;
 import com.wfq.graph.ui.web.h5test;
@@ -49,13 +46,26 @@ public class MagicFragment extends BaseLazyFragment {
     @Override
     protected void initView() {
         web.getSettings().setJavaScriptEnabled(true);
-        web.loadUrl("file:///android_asset/device_id.html");
-//        web.loadUrl("http://192.168.60.103:8080/financial-web-m/jsp/intelligence/attention.jsp");
+//        web.loadUrl("file:///android_asset/web/error.html");
+//        web.addJavascriptInterface(this,"android");
+        web.loadUrl("http://app.ifcert.org.cn/share/notice/report1/Index-1711-23-1.jsp");
+
+    }
+
+    @JavascriptInterface
+    public void hellojs(){
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ToastUitl.show("hello js");
+            }
+        });
 
     }
 
     @Override
     protected void initListener() {
+
         web.setWebChromeClient(new WebChromeClient() {
             @Override
             public boolean onJsAlert(WebView view, String url, String message, JsResult result) {

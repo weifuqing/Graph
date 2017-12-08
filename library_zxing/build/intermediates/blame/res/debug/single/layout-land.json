@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/weifuqing/Documents/workspace/my_project/Graph/library_zxing/build/intermediates/res/merged/debug/layout-land/share.xml",
+        "source": "/Users/weifuqing/Documents/workspace/my_project/Graph/library_zxing/src/main/res/layout-land/share.xml"
+    },
+    {
+        "merged": "/Users/weifuqing/Documents/workspace/my_project/Graph/library_zxing/build/intermediates/res/merged/debug/layout-land/encode.xml",
+        "source": "/Users/weifuqing/Documents/workspace/my_project/Graph/library_zxing/src/main/res/layout-land/encode.xml"
+    }
+]

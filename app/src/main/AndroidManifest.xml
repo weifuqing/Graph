@@ -68,6 +68,9 @@
         <activity android:name=".ui.live.LiveWebActivity"
             />
 
+        <activity android:name=".ui.live.LiveActivity"
+            />
+
         <activity android:name=".ui.lock.LockActivity"
             android:launchMode="singleInstance"
             android:taskAffinity="com.example.suoping.lockscreen"

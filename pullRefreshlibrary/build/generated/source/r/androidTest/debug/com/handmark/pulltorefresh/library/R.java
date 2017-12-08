@@ -70,6 +70,7 @@ public final class R {
     public static final class layout {
         public static final int pull_to_refresh_header_horizontal = 0x7f030000;
         public static final int pull_to_refresh_header_vertical = 0x7f030001;
+        public static final int pull_to_refresh_header_vertical_self = 0x7f030002;
     }
     public static final class string {
         public static final int pull_to_refresh_from_bottom_pull_label = 0x7f050003;

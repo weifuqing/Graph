@@ -1,62 +1,65 @@
 package com.wfq.graph.ui.main;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.LayoutRes;
-import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatSpinner;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.LayoutInflater;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.statistics.StatService;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.jude.easyrecyclerview.EasyRecyclerView;
-import com.jude.easyrecyclerview.adapter.BaseViewHolder;
-import com.jude.easyrecyclerview.adapter.RecyclerArrayAdapter;
 import com.wfq.graph.R;
+import com.wfq.graph.app.HttpCallback;
+import com.wfq.graph.app.MyApplication;
 import com.wfq.graph.base.BaseFragment;
-import com.wfq.graph.base.BaseLazyFragment;
+import com.wfq.graph.data.bean.DouyuResult;
+import com.wfq.graph.data.bean.douyu.Game;
 import com.wfq.graph.data.bean.douyu.RoomInfo;
-import com.wfq.graph.ui.live.LiveWebActivity;
-import com.wfq.graph.utils.ConstantUtil;
+import com.wfq.graph.data.source.remote.RemoteDouyuDataSource;
+import com.wfq.graph.ui.live.LiveActivity;
+import com.wfq.graph.utils.JsonUtil;
+import com.wfq.graph.utils.ToastUitl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by weifuqing on 2017/6/8 0008.
  */
 
-public class LiveFragment extends BaseFragment implements RecyclerArrayAdapter.OnLoadMoreListener, LiveContract.View, SwipeRefreshLayout.OnRefreshListener {
+public class LiveFragment extends BaseFragment {
 
 
     @BindView(R.id.rv_room)
-    EasyRecyclerView rvRoom;
+    RecyclerView rvRoom;
     @BindView(R.id.network_error_layout)
     ViewStub networkErrorLayout;
+    @BindView(R.id.spinner_game)
+    AppCompatSpinner spinner_game;
 
-    private View networkErrorView;
-
-    private List<RoomInfo> roomInfos = new ArrayList<>();
-    private RoomAdapter roomAdapter;
-
-    private LivePresenter livePresenter;
-    private int page = 0;
     private int offset = 0;
-    private int limit = 10;
+    private int limit = 20;
     private boolean hasNext = true;
     private String id = "DOTA2";
+
+
+    List<RoomInfo> rooms = new ArrayList<>();
+    BaseQuickAdapter roomAdapter;
+    List<Game> games = new ArrayList<>();
+    ArrayAdapter gameAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -65,156 +68,162 @@ public class LiveFragment extends BaseFragment implements RecyclerArrayAdapter.O
 
     @Override
     protected void initView() {
-        livePresenter = new LivePresenter(this);
-        initRecyclerView();
+        GridLayoutManager manager = new GridLayoutManager(getActivity(),2);
+        rvRoom.setLayoutManager(manager);
     }
 
-    private void initRecyclerView() {
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
-        rvRoom.setLayoutManager(staggeredGridLayoutManager);
-        roomAdapter = new RoomAdapter(getActivity());
+    private void initSpinner() {
 
-        rvRoom.setAdapterWithProgress(roomAdapter);
+        List<String> list = new ArrayList<>();
+        for (Game game:games){
+            list.add(game.getGame_name());
+        }
 
-        roomAdapter.setMore(R.layout.layout_load_more, this);
-        roomAdapter.setError(R.layout.layout_error);
-        roomAdapter.setNoMore(R.layout.layout_no_more);
+        gameAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item,list);
+        gameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_game.setAdapter(gameAdapter);
+        spinner_game.setSelection(getPositionByName("DOTA2"));
+    }
 
-        rvRoom.setRefreshListener(this);
+    private int getPositionByName(String name){
+        for(int i=0;i<games.size();i++){
+            if(name.equals(games.get(i).getGame_name())){
+                return i;
+            }
+        }
+        return 0;
     }
 
     @Override
     protected void initListener() {
-        roomAdapter.setOnItemClickListener(new RecyclerArrayAdapter.OnItemClickListener() {
+        spinner_game.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(int position) {
-                Bundle bundle = new Bundle();
-                bundle.putParcelable(ConstantUtil.ROOM_DOUYU,roomInfos.get(position));
-                gotoActivity(LiveWebActivity.class,bundle);
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Game game = games.get(i);
+                if(id!=game.getCate_id()){
+                    id = game.getCate_id();
+                    offset = 0;
+                    getRooms();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
+
     }
 
     @Override
     protected void initData() {
-        livePresenter.getRooms(getActivity(),getActivity(),id, offset, limit, true);
+        getGames();
+//        getRooms();
+    }
+
+    private void getGames() {
+        RemoteDouyuDataSource.getGames(getActivity(), new HttpCallback<DouyuResult>(getActivity(), DouyuResult.class, true) {
+
+            @Override
+            public void onSuccess(DouyuResult douyuResult) {
+                super.onSuccess(douyuResult);
+                if (douyuResult.isSuccess()) {
+                    games = JsonUtil.parseList(douyuResult.getData(),Game.class);
+                    initSpinner();
+                } else {
+                    ToastUitl.show(douyuResult.getData());
+                }
+            }
+
+            @Override
+            public void onFailure(int errorCode, String message) {
+                super.onFailure(errorCode, message);
+                ToastUitl.show(message);
+            }
+        });
+    }
+
+    private void getRooms() {
+        RemoteDouyuDataSource.getRooms(getActivity(), id, offset, limit, new HttpCallback<DouyuResult>(getActivity(), DouyuResult.class, true) {
+
+            @Override
+            public void onSuccess(DouyuResult douyuResult) {
+                super.onSuccess(douyuResult);
+                if (douyuResult.isSuccess()) {
+                    if (offset == 0) {
+                        rooms.clear();
+                        rooms.addAll(JsonUtil.parseList(douyuResult.getData(), RoomInfo.class));
+                        setAdapter();
+                        return;
+                    }
+                    if (TextUtils.isEmpty(douyuResult.getData())) {
+                        ToastUitl.show("没有更多了");
+                        roomAdapter.loadMoreEnd();
+                    }else {
+                        rooms.addAll(JsonUtil.parseList(douyuResult.getData(), RoomInfo.class));
+                        setAdapter();
+                        roomAdapter.loadMoreComplete();
+                    }
+                } else {
+                    ToastUitl.show(douyuResult.getData());
+                }
+            }
+
+            @Override
+            public void onFailure(int errorCode, String message) {
+                super.onFailure(errorCode, message);
+            }
+        });
+    }
+
+    public void setAdapter(){
+        if(roomAdapter == null){
+            roomAdapter = new BaseQuickAdapter<RoomInfo,BaseViewHolder>(R.layout.item_live,rooms) {
+
+                @Override
+                protected void convert(BaseViewHolder helper, RoomInfo item) {
+                    helper.setText(R.id.tv_name,item.getNickname());
+                    helper.setText(R.id.tv_num,item.getOnline()+"");
+                    ImageView iv_room = helper.getView(R.id.iv_room);
+                    ImageView iv_head = helper.getView(R.id.iv_head);
+                    Glide.with(LiveFragment.this).load(item.getRoom_src()).into(iv_room);
+                    Glide.with(LiveFragment.this).load(item.getAvatar_small()).into(iv_head);
+                }
+            };
+            rvRoom.setAdapter(roomAdapter);
+            roomAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    LiveActivity.launch(getActivity(),rooms.get(position));
+                }
+            });
+            roomAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+                @Override
+                public void onLoadMoreRequested() {
+                    offset+=limit;
+                    getRooms();
+                }
+            },rvRoom);
+
+        }else {
+            rvRoom.post(new Runnable() {
+                @Override
+                public void run() {
+                    roomAdapter.notifyDataSetChanged();
+                }
+            });
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        StatService.startPage("直播列表");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        StatService.endPage("直播列表");
-    }
-
-    @Override
-    public void onRefresh() {
-        page = 0;
-        offset = 0;
-        livePresenter.getRooms(getActivity(),getActivity(),id, offset, limit, true);
-    }
-
-    @Override
-    public void onLoadMore() {
-        if(hasNext) {
-            page++;
-            offset = page*limit;
-            livePresenter.getRooms(getActivity(),getActivity(), id, offset, limit, false);
-        }
-    }
-
-    @Override
-    public void refresh(List<RoomInfo> datas) {
-        roomInfos.clear();
-        roomInfos.addAll(datas);
-        roomAdapter.clear();
-        roomAdapter.addAll(datas);
-    }
-
-    @Override
-    public void load(List<RoomInfo> datas) {
-        if(datas==null||datas.size()==0){
-            hasNext = false;
-            return;
-        }
-        roomInfos.addAll(datas);
-        roomAdapter.addAll(datas);
-    }
-
-    @Override
-    public void showError() {
-        rvRoom.showError();
-        if(networkErrorView!=null){
-            networkErrorView.setVisibility(View.VISIBLE);
-            return;
-        }
-        networkErrorView = networkErrorLayout.inflate();
-    }
-
-    @Override
-    public void showNormal() {
-        if (networkErrorView != null) {
-            networkErrorView.setVisibility(View.GONE);
-        }
     }
 
 
-
-    class RoomAdapter extends RecyclerArrayAdapter<RoomInfo> {
-
-        public RoomAdapter(Context context) {
-            super(context);
-        }
-
-        @Override
-        public void OnBindViewHolder(BaseViewHolder holder, int position) {
-            super.OnBindViewHolder(holder, position);
-        }
-
-        @Override
-        public BaseViewHolder OnCreateViewHolder(ViewGroup parent, int viewType) {
-            return new RoomViewHolder(parent, R.layout.item_live);
-        }
-    }
-
-    class RoomViewHolder extends BaseViewHolder<RoomInfo>{
-
-        private ImageView iv_room;
-        private ImageView iv_head;
-        private TextView tv_name;
-        private TextView tv_num;
-
-        public RoomViewHolder(ViewGroup parent, @LayoutRes int res) {
-            super(parent, res);
-            iv_room = $(R.id.iv_room);
-            iv_head = $(R.id.iv_head);
-            tv_num = $(R.id.tv_num);
-            tv_name = $(R.id.tv_name);
-        }
-
-        @Override
-        public void setData(RoomInfo data) {
-            super.setData(data);
-
-            Glide.with(getContext())
-                    .load(data.getRoom_src())
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .into(iv_room);
-
-            Glide.with(getContext())
-                    .load(data.getAvatar_mid())
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .into(iv_head);
-
-            tv_num.setText(data.getOnline()+"");
-            tv_name.setText(data.getRoom_name());
-            tv_name.setSelected(true);
-
-        }
-    }
 }

@@ -11,7 +11,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
-import com.example.statistics.StatService;
 import com.wfq.graph.R;
 import com.wfq.graph.base.BaseActivity;
 import com.wfq.graph.data.bean.douyu.RoomInfo;
@@ -79,14 +78,12 @@ public class LiveWebActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         web_live.onResume();
-        StatService.startPage(roomInfo.getRoom_name());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         web_live.onPause();
-        StatService.endPage(roomInfo.getRoom_name());
     }
 
     public class MyWebChromeClient extends WebChromeClient{

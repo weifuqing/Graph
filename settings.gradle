@@ -1,1 +1,2 @@
-include ':app', ':verifycode', ':library_qiniu', ':pullRefreshlibrary', ':gradienttabstrip', ':statistics', ':library_video'
+include ':app', ':verifycode', ':pullRefreshlibrary', ':gradienttabstrip', ':vitamio'
+include ':library_zxing'

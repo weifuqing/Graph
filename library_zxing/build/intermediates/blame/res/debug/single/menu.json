@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/weifuqing/Documents/workspace/my_project/Graph/library_zxing/build/intermediates/res/merged/debug/menu/encode.xml",
+        "source": "/Users/weifuqing/Documents/workspace/my_project/Graph/library_zxing/src/main/res/menu/encode.xml"
+    },
+    {
+        "merged": "/Users/weifuqing/Documents/workspace/my_project/Graph/library_zxing/build/intermediates/res/merged/debug/menu/capture.xml",
+        "source": "/Users/weifuqing/Documents/workspace/my_project/Graph/library_zxing/src/main/res/menu/capture.xml"
+    },
+    {
+        "merged": "/Users/weifuqing/Documents/workspace/my_project/Graph/library_zxing/build/intermediates/res/merged/debug/menu/history.xml",
+        "source": "/Users/weifuqing/Documents/workspace/my_project/Graph/library_zxing/src/main/res/menu/history.xml"
+    }
+]

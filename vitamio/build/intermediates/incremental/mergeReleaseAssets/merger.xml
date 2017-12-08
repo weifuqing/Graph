@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/weifuqing/Documents/workspace/my_project/Graph/vitamio/src/main/assets"/><source path="/Users/weifuqing/Documents/workspace/my_project/Graph/vitamio/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/Users/weifuqing/Documents/workspace/my_project/Graph/vitamio/src/release/assets"/></dataSet></merger>

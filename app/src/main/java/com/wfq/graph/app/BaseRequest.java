@@ -1,28 +1,18 @@
 package com.wfq.graph.app;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
-import android.util.Log;
-import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.qiniu.android.utils.StringUtils;
-import com.wfq.graph.data.bean.ArrayResult;
-import com.wfq.graph.data.bean.Result;
-import com.wfq.graph.data.bean.douyu.RoomInfo;
 import com.wfq.graph.utils.AppUtil;
-import com.wfq.graph.utils.GsonUtil;
-import com.wfq.graph.utils.ToastUitl;
+import com.wfq.graph.utils.JsonUtil;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
@@ -104,22 +94,8 @@ public class BaseRequest {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                callback.onSuccess(GsonUtil.parseObject(s,callback.getT_class()));
-//                    if (callback.isList()) {
-//                        ArrayResult arrayResult = GsonUtil.parseObject(s, ArrayResult.class);
-//                        if (arrayResult.getError() == 200) {
-//                            callback.onSuccess(arrayResult.getData());
-//                        } else {
-//                            callback.onError(arrayResult);
-//                        }
-//                    } else {
-//                        Result result = GsonUtil.parseObject(s, Result.class);
-//                        if (result.getError() == 200) {
-//                            callback.onSuccess(result.getData());
-//                        } else {
-//                            callback.onError(result);
-//                        }
-//                    }
+                callback.onSuccess(JsonUtil.parseObject(s,callback.getT_class()));
+
             }
         });
     }
@@ -248,7 +224,7 @@ public class BaseRequest {
         String parameter = "";
         while (entries.hasNext()) {
             Map.Entry<String, String> entry = (Map.Entry<String, String>) entries.next();
-            if (!StringUtils.isNullOrEmpty(entry.getValue())) {
+            if (!TextUtils.isEmpty(entry.getValue())) {
                 if (!TextUtils.isEmpty(parameter)) {
                     parameter += "&";
                 } else {

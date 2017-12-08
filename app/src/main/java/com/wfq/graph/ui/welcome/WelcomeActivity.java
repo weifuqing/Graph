@@ -3,8 +3,6 @@ package com.wfq.graph.ui.welcome;
 import android.text.TextUtils;
 import android.widget.TextView;
 
-import com.example.statistics.StatConfig;
-import com.example.statistics.bean.StatReportStrategy;
 import com.github.irvingryan.VerifyCodeView;
 import com.wfq.graph.R;
 import com.wfq.graph.base.BaseActivity;
@@ -40,7 +38,6 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     protected void initView() {
 
-        StatConfig.init(getApplicationContext(), StatReportStrategy.BATCH);
         passWord = SPUtil.getString(this, ConstantUtil.PASSWORD_MD5);
 
         if (TextUtils.isEmpty(passWord)) {

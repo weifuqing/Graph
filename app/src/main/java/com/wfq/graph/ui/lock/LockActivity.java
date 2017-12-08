@@ -11,7 +11,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.danikula.videocache.service.MusicPlayer;
 import com.wfq.graph.R;
 import com.wfq.graph.base.BaseActivity;
 import com.wfq.graph.utils.ConstantUtil;
@@ -78,11 +77,6 @@ public class LockActivity extends SwipeBackActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.lock_music_play:
-                if(MusicPlayer.isPlaying()){
-                    MusicPlayer.pause();
-                }else {
-                    MusicPlayer.getMediaPlayer().start();
-                }
                 break;
             case R.id.lock_music_pre:
                 if(ConstantUtil.currentPosition==0){
@@ -90,8 +84,6 @@ public class LockActivity extends SwipeBackActivity implements View.OnClickListe
                 }else {
                     ConstantUtil.currentPosition--;
                 }
-                MusicPlayer.getMediaPlayer().reset();
-                MusicPlayer.setPath(ConstantUtil.urls.get(ConstantUtil.currentPosition));
                 setName();
                 break;
             case R.id.lock_music_next:
@@ -100,8 +92,6 @@ public class LockActivity extends SwipeBackActivity implements View.OnClickListe
                 }else {
                     ConstantUtil.currentPosition++;
                 }
-                MusicPlayer.getMediaPlayer().reset();
-                MusicPlayer.setPath(ConstantUtil.urls.get(ConstantUtil.currentPosition));
                 setName();
                 break;
         }

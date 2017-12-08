@@ -2,7 +2,6 @@ package com.wfq.graph.ui.main;
 
 import android.widget.ListView;
 
-import com.example.statistics.StatService;
 import com.wfq.graph.R;
 import com.wfq.graph.base.BaseLazyFragment;
 import com.wfq.graph.base.BasicAdapter;
@@ -58,12 +57,10 @@ public class ContactFragment extends BaseLazyFragment{
     @Override
     public void onResume() {
         super.onResume();
-        StatService.startPage("联系人");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        StatService.endPage("联系人");
     }
 }

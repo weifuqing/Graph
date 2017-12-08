@@ -1,14 +1,14 @@
 [
     {
-        "merged": "D:\\project\\Graph\\pullRefreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_flip.png",
-        "source": "D:\\project\\Graph\\pullRefreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_flip.png"
+        "merged": "/Users/weifuqing/Documents/workspace/my_project/Graph/pullRefreshlibrary/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/default_ptr_rotate.png",
+        "source": "/Users/weifuqing/Documents/workspace/my_project/Graph/pullRefreshlibrary/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/default_ptr_rotate.png"
     },
     {
-        "merged": "D:\\project\\Graph\\pullRefreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_rotate.png",
-        "source": "D:\\project\\Graph\\pullRefreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_rotate.png"
+        "merged": "/Users/weifuqing/Documents/workspace/my_project/Graph/pullRefreshlibrary/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/default_ptr_flip.png",
+        "source": "/Users/weifuqing/Documents/workspace/my_project/Graph/pullRefreshlibrary/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/default_ptr_flip.png"
     },
     {
-        "merged": "D:\\project\\Graph\\pullRefreshlibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\indicator_arrow.png",
-        "source": "D:\\project\\Graph\\pullRefreshlibrary\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\indicator_arrow.png"
+        "merged": "/Users/weifuqing/Documents/workspace/my_project/Graph/pullRefreshlibrary/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/indicator_arrow.png",
+        "source": "/Users/weifuqing/Documents/workspace/my_project/Graph/pullRefreshlibrary/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/indicator_arrow.png"
     }
 ]

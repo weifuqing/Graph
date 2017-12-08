@@ -4,45 +4,7 @@
     android:layout_height="match_parent"
     >
 
-    <com.danikula.videocache.widget.VideoCacheView
-        android:id="@+id/videoCacheView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        />
+    
 
-    <com.danikula.videocache.widget.MusicSeekBar
-        android:id="@+id/musicSeekBar"
-        style="@android:style/Widget.Holo.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="16dp"
-        android:max="100"/>
-
-
-    <TextView
-        android:id="@+id/tv_start"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="开始"
-        android:gravity="center"
-        android:padding="10dp"/>
-
-    <TextView
-        android:id="@+id/tv_pause"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="暂停"
-        android:gravity="center"
-        android:padding="10dp"/>
-
-    <TextView
-        android:id="@+id/tv_next"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="下一个"
-        android:gravity="center"
-        android:padding="10dp"/>
 
 </LinearLayout>

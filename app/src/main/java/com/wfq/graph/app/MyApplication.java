@@ -13,6 +13,7 @@ import com.umeng.analytics.MobclickAgent;
 import java.util.concurrent.TimeUnit;
 
 import cn.jpush.android.api.JPushInterface;
+import io.vov.vitamio.Vitamio;
 import okhttp3.OkHttpClient;
 
 /**
@@ -43,11 +44,17 @@ public class MyApplication extends Application {
         //友盟
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
 
+        //环信
         initHuanxin();
         //leakcanary
 //        refWatcher = LeakCanary.install(this);
+
+        //Vitamio播放器
+        Vitamio.isInitialized(this);
     }
     private void initHuanxin(){
+
+
         EMOptions options = new EMOptions();
         // 默认添加好友时，是不需要验证的，改成需要验证
         options.setAcceptInvitationAlways(false);
